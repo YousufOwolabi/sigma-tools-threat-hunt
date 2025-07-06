@@ -1,0 +1,23 @@
+title: Suspicious Windows LOLBins and Credential Dumping Tools
+id: b94a4f92-8c10-4d16-93b9-223bcf70e0ab
+status: experimental
+description: Detects command lines invoking Mimikatz, rundll32, or regsvr32, which may indicate credential dumping or LOLBin abuse.
+author: Ghost
+date: 2025-07-06
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    CommandLine|contains:
+      - "mimikatz"
+      - "rundll32"
+      - "regsvr32"
+  condition: selection
+fields:
+  - CommandLine
+level: high
+tags:
+  - attack.credential_access
+  - attack.execution
+
